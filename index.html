@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NammaCric - Cricket Calculator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0a0a0f;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #00d4ff, #00ff88);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 0.95rem;
+            margin-top: 5px;
+        }
+
+        /* Cards Container */
+        .cards {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 100%;
+            max-width: 900px;
+        }
+
+        /* Card */
+        .card {
+            background: #13131f;
+            border: 1px solid #1e1e2e;
+            border-radius: 20px;
+            padding: 30px;
+            flex: 1;
+            min-width: 280px;
+            max-width: 400px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 212, 255, 0.1);
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #00d4ff;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card-title span {
+            font-size: 1.3rem;
+        }
+
+        /* Input Groups */
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 0.8rem;
+            color: #888;
+            margin-bottom: 6px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .input-group input {
+            width: 100%;
+            background: #0a0a0f;
+            border: 2px solid #1e1e2e;
+            border-radius: 10px;
+            padding: 12px 15px;
+            color: white;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+            transition: border-color 0.3s ease;
+            outline: none;
+        }
+
+        .input-group input:focus {
+            border-color: #00d4ff;
+        }
+
+        .input-group input::placeholder {
+            color: #444;
+        }
+
+        /* Result Display */
+        .result {
+            background: linear-gradient(135deg, #0a1628, #0a2818);
+            border: 1px solid #1e3a2e;
+            border-radius: 12px;
+            padding: 15px 20px;
+            margin: 20px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .result-label {
+            font-size: 0.85rem;
+            color: #888;
+            font-weight: 500;
+        }
+
+        .result-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #00d4ff, #00ff88);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Calculate Button */
+        .calc-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #00d4ff, #00ff88);
+            border: none;
+            border-radius: 12px;
+            color: #000;
+            font-size: 1rem;
+            font-weight: 700;
+            font-family: 'Poppins', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 5px;
+        }
+
+        .calc-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 212, 255, 0.4);
+        }
+
+        .calc-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 50px;
+            color: #333;
+            font-size: 0.8rem;
+            text-align: center;
+        }
+
+        .footer span {
+            color: #00d4ff;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .cards {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .card {
+                width: 100%;
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="header">
+        <h1>🏏 CricPulse</h1>
+        <p>Cricket Statistics Calculator</p>
+    </div>
+
+    <!-- Cards -->
+    <div class="cards">
+
+        <!-- Strike Rate Card -->
+        <div class="card">
+            <div class="card-title">
+                <span>⚡</span> Strike Rate
+            </div>
+
+            <div class="input-group">
+                <label>Runs Scored</label>
+                <input type="number" id="run" placeholder="e.g. 75">
+            </div>
+
+            <div class="input-group">
+                <label>Balls Faced</label>
+                <input type="number" id="ball" placeholder="e.g. 50">
+            </div>
+
+            <div class="result">
+                <span class="result-label">Strike Rate</span>
+                <span class="result-value" id="strikerate">—</span>
+            </div>
+
+            <button class="calc-btn" onclick="calculateSR()">Calculate Strike Rate</button>
+        </div>
+
+        <!-- Run Rate Card -->
+        <div class="card">
+            <div class="card-title">
+                <span>📊</span> Run Rate
+            </div>
+
+            <div class="input-group">
+                <label>Total Runs</label>
+                <input type="number" id="runs" placeholder="e.g. 180">
+            </div>
+
+            <div class="input-group">
+                <label>Overs Bowled</label>
+                <input type="number" id="overs" placeholder="e.g. 20">
+            </div>
+
+            <div class="result">
+                <span class="result-label">Run Rate</span>
+                <span class="result-value" id="runrate">—</span>
+            </div>
+
+            <button class="calc-btn" onclick="calculateRR()">Calculate Run Rate</button>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        Built with ❤️ by <span>Rithish</span> | CricPulse 2026
+    </div>
+
+    <script>
+        function calculateSR() {
+            const runval = parseFloat(document.getElementById("run").value);
+            const ballval = parseFloat(document.getElementById("ball").value);
+
+            if (!runval || !ballval || ballval === 0) {
+                document.getElementById("strikerate").textContent = "Invalid";
+                return;
+            }
+
+            const sr = ((runval / ballval) * 100).toFixed(2);
+            document.getElementById("strikerate").textContent = sr;
+        }
+
+        function calculateRR() {
+            const runsval = parseFloat(document.getElementById("runs").value);
+            const oversval = parseFloat(document.getElementById("overs").value);
+
+            if (!runsval || !oversval || oversval === 0) {
+                document.getElementById("runrate").textContent = "Invalid";
+                return;
+            }
+
+            const rr = (runsval / oversval).toFixed(2);
+            document.getElementById("runrate").textContent = rr;
+        }
+    </script>
+
+</body>
+</html>
