@@ -1,1 +1,1 @@
-**Official Website** : https://cricpulse23.netlify.app/
+**Tool** : https://cricpulse23.netlify.app/
